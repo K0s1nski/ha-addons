@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image ${{ matrix.arch }}
-      run: docker build . --file Dockerfile --tag dnsmasq-dhcp:$(date +%s)
+      run: |
+        BUILD_FROM="ghcr.io/home-assistant/${{ matrix.arch }}-base:3.20"
+        docker build . --file Dockerfile --tag dnsmasq-dhcp:$(date +%s)
       working-directory: ./dnsmasq-dhcp
-      env:
-        BUILD_FROM: "ghcr.io/home-assistant/${{ matrix.arch }}-base:3.20"
